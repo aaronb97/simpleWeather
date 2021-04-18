@@ -20,8 +20,6 @@ app.get("/q/:q", async (req, res) => {
     res.send(weatherResponse.data);
   } catch (e) {
     console.log(e);
-  } finally {
-    // idk
   }
 });
 
