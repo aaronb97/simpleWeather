@@ -1,7 +1,7 @@
+import { Daily } from "../../../../types/openWeatherResponse";
+
 interface WeatherDayProps {
-  dayWeather: {
-    clouds: number;
-  };
+  dayWeather: Daily;
 }
 
 export const WeatherDay = ({ dayWeather }: WeatherDayProps) => {

@@ -2,10 +2,11 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import { WeatherDay } from "../weatherDay/WeatherDay";
+import { WeatherResponse } from "../../../../types/openWeatherResponse";
 
 export const WeatherDisplay = () => {
   const query = useParams<any>();
-  const [weatherResults, setWeatherResults] = useState<any>();
+  const [weatherResults, setWeatherResults] = useState<WeatherResponse>();
 
   console.log(query);
 
@@ -15,7 +16,6 @@ export const WeatherDisplay = () => {
         `http://localhost:4000/q/${query.query}`
       );
 
-      console.log(weatherResults.data);
       setWeatherResults(weatherResults.data);
     };
 
