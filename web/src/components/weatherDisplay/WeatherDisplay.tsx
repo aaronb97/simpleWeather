@@ -12,8 +12,7 @@ export const WeatherDisplay = () => {
   useEffect(() => {
     const getWeatherResults = async () => {
       const weatherResults = await axios.get(
-        `http://localhost:4000/q/${query.query}`,
-        { headers: { "Access-Control-Allow-Origin": "*" } }
+        `http://localhost:4000/q/${query.query}`
       );
 
       console.log(weatherResults.data);
@@ -23,13 +22,17 @@ export const WeatherDisplay = () => {
     getWeatherResults();
   }, [query]);
 
-  return (
-    <>
-      <WeatherDay dayWeather={weatherResults.daily[0]}></WeatherDay>
-      <WeatherDay dayWeather={weatherResults.daily[1]}></WeatherDay>
-      <WeatherDay dayWeather={weatherResults.daily[2]}></WeatherDay>
-      <WeatherDay dayWeather={weatherResults.daily[3]}></WeatherDay>
-      <WeatherDay dayWeather={weatherResults.daily[4]}></WeatherDay>
-    </>
-  );
+  if (weatherResults) {
+    return (
+      <>
+        <WeatherDay dayWeather={weatherResults.daily[0]}></WeatherDay>
+        <WeatherDay dayWeather={weatherResults.daily[1]}></WeatherDay>
+        <WeatherDay dayWeather={weatherResults.daily[2]}></WeatherDay>
+        <WeatherDay dayWeather={weatherResults.daily[3]}></WeatherDay>
+        <WeatherDay dayWeather={weatherResults.daily[4]}></WeatherDay>
+      </>
+    );
+  }
+
+  return <div>Fetching weather...</div>;
 };
