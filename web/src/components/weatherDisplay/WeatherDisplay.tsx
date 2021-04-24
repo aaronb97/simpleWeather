@@ -1,10 +1,10 @@
-import { useEffect, useState } from "react";
-import { useParams } from "react-router";
-import { WeatherDay } from "../weatherDay/WeatherDay";
-import { WeatherResponse } from "../../../../types/openWeatherResponse";
-import { fetchWeatherResults } from "../../services/apiService";
+import { useEffect, useState } from 'react';
+import { useParams } from 'react-router';
+import { WeatherDay } from '../weatherDay/WeatherDay';
+import { WeatherResponse } from '../../../../types/openWeatherResponse';
+import fetchWeatherResults from '../../services/apiService';
 
-export const WeatherDisplay = () => {
+const WeatherDisplay = () => {
   const params = useParams<any>();
   const [weatherResults, setWeatherResults] = useState<WeatherResponse>();
   const [errorOccured, setErrorOccurred] = useState(false);
@@ -12,9 +12,9 @@ export const WeatherDisplay = () => {
   useEffect(() => {
     const getWeatherResults = async () => {
       try {
-        const weatherResults = await fetchWeatherResults(params.query);
+        const response = await fetchWeatherResults(params.query);
 
-        setWeatherResults(weatherResults.data);
+        setWeatherResults(response.data);
       } catch (e) {
         console.error(e);
         setErrorOccurred(true);
@@ -31,14 +31,16 @@ export const WeatherDisplay = () => {
   if (weatherResults) {
     return (
       <>
-        <WeatherDay dayWeather={weatherResults.daily[0]}></WeatherDay>
-        <WeatherDay dayWeather={weatherResults.daily[1]}></WeatherDay>
-        <WeatherDay dayWeather={weatherResults.daily[2]}></WeatherDay>
-        <WeatherDay dayWeather={weatherResults.daily[3]}></WeatherDay>
-        <WeatherDay dayWeather={weatherResults.daily[4]}></WeatherDay>
+        <WeatherDay dayWeather={weatherResults.daily[0]} />
+        <WeatherDay dayWeather={weatherResults.daily[1]} />
+        <WeatherDay dayWeather={weatherResults.daily[2]} />
+        <WeatherDay dayWeather={weatherResults.daily[3]} />
+        <WeatherDay dayWeather={weatherResults.daily[4]} />
       </>
     );
   }
 
   return <div>Fetching weather...</div>;
 };
+
+export default WeatherDisplay;
