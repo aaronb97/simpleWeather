@@ -7,16 +7,26 @@ import { fetchWeatherResults } from "../../services/apiService";
 export const WeatherDisplay = () => {
   const params = useParams<any>();
   const [weatherResults, setWeatherResults] = useState<WeatherResponse>();
+  const [errorOccured, setErrorOccurred] = useState(false);
 
   useEffect(() => {
     const getWeatherResults = async () => {
-      const weatherResults = await fetchWeatherResults(params.query);
+      try {
+        const weatherResults = await fetchWeatherResults(params.query);
 
-      setWeatherResults(weatherResults.data);
+        setWeatherResults(weatherResults.data);
+      } catch (e) {
+        console.error(e);
+        setErrorOccurred(true);
+      }
     };
 
     getWeatherResults();
   }, [params]);
+
+  if (errorOccured) {
+    return <div>An error occured</div>;
+  }
 
   if (weatherResults) {
     return (
