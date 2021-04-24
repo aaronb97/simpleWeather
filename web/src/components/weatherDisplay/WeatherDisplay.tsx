@@ -1,26 +1,22 @@
-import axios from "axios";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import { WeatherDay } from "../weatherDay/WeatherDay";
 import { WeatherResponse } from "../../../../types/openWeatherResponse";
+import { fetchWeatherResults } from "../../services/apiService";
 
 export const WeatherDisplay = () => {
-  const query = useParams<any>();
+  const params = useParams<any>();
   const [weatherResults, setWeatherResults] = useState<WeatherResponse>();
-
-  console.log(query);
 
   useEffect(() => {
     const getWeatherResults = async () => {
-      const weatherResults = await axios.get(
-        `http://localhost:4000/q/${query.query}`
-      );
+      const weatherResults = await fetchWeatherResults(params.query);
 
       setWeatherResults(weatherResults.data);
     };
 
     getWeatherResults();
-  }, [query]);
+  }, [params]);
 
   if (weatherResults) {
     return (
