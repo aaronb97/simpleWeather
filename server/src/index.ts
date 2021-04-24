@@ -15,6 +15,12 @@ app.get("/q/:q", async (req, res) => {
       `http://api.openweathermap.org/geo/1.0/direct?q=${req.params.q}&appid=${process.env.WEATHER_KEY}`
     );
 
+    if (!latLonResponse.data?.length) {
+      res.status(404);
+      res.send();
+      return;
+    }
+
     const { lat, lon } = latLonResponse.data[0];
     const weatherResponse = await axios.get(
       `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&appid=${process.env.WEATHER_KEY}`
@@ -27,5 +33,14 @@ app.get("/q/:q", async (req, res) => {
   }
 });
 
-app.listen(4000);
-console.log("listening on 4000");
+app.listen(3001);
+console.log("listening on 3001");
+
+process.once("SIGUSR2", function () {
+  process.kill(process.pid, "SIGUSR2");
+});
+
+process.on("SIGINT", function () {
+  // this is only called on ctrl+c, not restart
+  process.exit(1);
+});
