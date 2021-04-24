@@ -16,7 +16,6 @@ const WeatherDisplay = () => {
 
         setWeatherResults(response.data);
       } catch (e) {
-        console.error(e);
         setErrorOccurred(true);
       }
     };
