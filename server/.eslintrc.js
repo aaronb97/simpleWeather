@@ -5,6 +5,7 @@ module.exports = {
   },
   extends: [
     'airbnb-base',
+    'plugin:node/recommended',
     'plugin:import/errors',
     'plugin:import/warnings',
     'plugin:import/typescript',
@@ -18,5 +19,9 @@ module.exports = {
   plugins: ['@typescript-eslint'],
   rules: {
     'no-console': 'off',
+    'node/no-unsupported-features/es-syntax': [
+      'error',
+      { ignores: ['modules'] },
+    ],
   },
 };

@@ -43,5 +43,6 @@ process.once('SIGUSR2', () => {
 
 process.on('SIGINT', () => {
   // this is only called on ctrl+c, not restart
+  // eslint-disable-next-line no-process-exit
   process.exit(1);
 });
