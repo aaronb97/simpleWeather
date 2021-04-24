@@ -1,6 +1,7 @@
 import express from 'express';
 import axios from 'axios';
 import cors from 'cors';
+
 require('dotenv').config();
 require('source-map-support').install();
 
@@ -36,11 +37,11 @@ app.get('/q/:q', async (req, res) => {
 app.listen(3001);
 console.log('listening on 3001');
 
-process.once('SIGUSR2', function () {
+process.once('SIGUSR2', () => {
   process.kill(process.pid, 'SIGUSR2');
 });
 
-process.on('SIGINT', function () {
+process.on('SIGINT', () => {
   // this is only called on ctrl+c, not restart
   process.exit(1);
 });
