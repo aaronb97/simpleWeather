@@ -7,6 +7,7 @@ function App() {
   return (
     <>
       <Router>
+        Nav bar goes here
         <Switch>
           <Route path="/weather/:query">
             <WeatherDisplay />
