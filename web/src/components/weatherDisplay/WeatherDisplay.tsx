@@ -32,11 +32,13 @@ const WeatherDisplay = () => {
   if (weatherResults) {
     return (
       <div id="weatherGrid">
+        <div />
         <WeatherDay dayWeather={weatherResults.daily[0]} />
         <WeatherDay dayWeather={weatherResults.daily[1]} />
         <WeatherDay dayWeather={weatherResults.daily[2]} />
         <WeatherDay dayWeather={weatherResults.daily[3]} />
         <WeatherDay dayWeather={weatherResults.daily[4]} />
+        <div />
       </div>
     );
   }
