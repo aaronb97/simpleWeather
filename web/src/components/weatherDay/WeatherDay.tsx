@@ -5,6 +5,9 @@ interface WeatherDayProps {
 }
 
 export const WeatherDay = ({ dayWeather }: WeatherDayProps) => (
-  <div>{dayWeather.clouds}</div>
+  <div>
+    <p>Min: {dayWeather.temp.min}</p>
+    <p>Max: {dayWeather.temp.max}</p>
+  </div>
 );
 export default WeatherDay;

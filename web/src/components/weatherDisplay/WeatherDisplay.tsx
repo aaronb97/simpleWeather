@@ -4,6 +4,8 @@ import { WeatherDay } from '../weatherDay/WeatherDay';
 import { WeatherResponse } from '../../../../types/openWeatherResponse';
 import fetchWeatherResults from '../../services/apiService';
 
+import './weatherDisplay.css';
+
 const WeatherDisplay = () => {
   const params = useParams<any>();
   const [weatherResults, setWeatherResults] = useState<WeatherResponse>();
@@ -29,13 +31,13 @@ const WeatherDisplay = () => {
 
   if (weatherResults) {
     return (
-      <>
+      <div id="weatherGrid">
         <WeatherDay dayWeather={weatherResults.daily[0]} />
         <WeatherDay dayWeather={weatherResults.daily[1]} />
         <WeatherDay dayWeather={weatherResults.daily[2]} />
         <WeatherDay dayWeather={weatherResults.daily[3]} />
         <WeatherDay dayWeather={weatherResults.daily[4]} />
-      </>
+      </div>
     );
   }
 
