@@ -7,11 +7,17 @@ interface WeatherDayProps {
   dayWeather: Daily;
 }
 
+const toString = (temp: number) => {
+  const num = (temp - 272.15) * (9 / 5) + 32;
+  return `${num.toFixed(0)}°`;
+};
+
 export const WeatherDay = ({ dayWeather }: WeatherDayProps) => (
   <div className="weatherDay">
     <p>{moment.unix(dayWeather.dt).format('dddd')}</p>
+    <p>{dayWeather.weather[0].description}</p>
     <p>
-      Lo: {dayWeather.temp.min} | Hi: {dayWeather.temp.max}
+      Lo: {toString(dayWeather.temp.min)} | Hi: {toString(dayWeather.temp.max)}
     </p>
   </div>
 );
